@@ -145,7 +145,9 @@ const actions = {
   async getDiaries({ commit }) {
     try {
       commit("diaries_request");
-      let res = await axios.get("http://localhost:3000/api/diaries");
+      let res = await axios.get(
+        "https://backend-304cem.herokuapp.com/api/diaries"
+      );
       commit("diaries_data", res.data);
       console.log(res.data);
       return res;
