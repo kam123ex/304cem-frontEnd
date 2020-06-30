@@ -1,2 +1,2 @@
 (window["webpackJsonp"]=window["webpackJsonp"]||[]).push([["chunk-2d22d746"],{f820:function(a,t,e){"use strict";e.r(t);var s=function(){var a=this,t=a.$createElement;a._self._c;return a._m(0)},n=[function(){var a=this,t=a.$createElement,e=a._self._c||t;return e("div",{staticClass:"about"},[e("h1",{staticClass:"display3"},[a._v("About Us")]),e("div",{staticClass:"card p-3"},[e("h4",[a._v("We are Diary Inc.")]),e("p",[a._v("We are happy to help you write your diary.")]),e("span",[a._v("Business Email:")]),a._v(" mart@gmail.com ")])])}],i=e("2877"),r={},c=Object(i["a"])(r,s,n,!1,null,null,null);t["default"]=c.exports}}]);
-//# sourceMappingURL=chunk-2d22d746.342105d5.js.map
+//# sourceMappingURL=chunk-2d22d746.ccf0dc3a.js.map
