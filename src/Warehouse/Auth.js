@@ -32,7 +32,10 @@ const actions = {
   async login({ commit }, user) {
     commit("auth_request");
     try {
-      let res = await axios.post("http://localhost:3000/api/users/login", user);
+      let res = await axios.post(
+        "https://backend-304cem.herokuapp.com/api/users/login",
+        user
+      );
       if (res.data.success) {
         const token = res.data.token;
         const user = res.data.user;
@@ -66,7 +69,9 @@ const actions = {
   // Get the user Profile
   async getProfile({ commit }) {
     commit("profile_request");
-    let res = await axios.get("http://localhost:3000/api/users/profile");
+    let res = await axios.get(
+      "https://backend-304cem.herokuapp.com/api/users/profile"
+    );
     commit("user_profile", res.data.user);
     return res;
   },
