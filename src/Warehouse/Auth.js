@@ -32,10 +32,7 @@ const actions = {
   async login({ commit }, user) {
     commit("auth_request");
     try {
-      let res = await axios.post(
-        "https://backend-304cem.herokuapp.com/api/users/login",
-        user
-      );
+      let res = await axios.post("http://localhost:3000/api/users/login", user);
       if (res.data.success) {
         const token = res.data.token;
         const user = res.data.user;
@@ -69,12 +66,29 @@ const actions = {
   // Get the user Profile
   async getProfile({ commit }) {
     commit("profile_request");
-    let res = await axios.get(
-      "https://backend-304cem.herokuapp.com/api/users/profile"
-    );
+    let res = await axios.get("http://localhost:3000/api/users/profile");
     commit("user_profile", res.data.user);
     return res;
   },
+  // Get the user Profile
+  async updateUser({ commit }, userData) {
+    console.log(userData);
+    try {
+      commit("updateUser_request");
+      let res = await axios.put(
+        "http://localhost:3000/api/users/update/" + userData.userId,
+        userData
+      );
+      if (res.data.success !== undefined) {
+        commit("updateUser_success");
+      }
+      console.log(res.data);
+      return res;
+    } catch (err) {
+      commit("updateUser_error", err);
+    }
+  },
+
   // Logout the user
   async logout({ commit }) {
     await localStorage.removeItem("token");
@@ -116,7 +130,7 @@ const actions = {
     console.log(diaryData);
 
     try {
-      commit("diary_request");
+      commit("updateDiary_request");
       let res = await axios.put(
         "http://localhost:3000/api/diaries/update/" + diaryData.diaryId,
         diaryData
@@ -127,7 +141,7 @@ const actions = {
       console.log(res.data);
       return res;
     } catch (err) {
-      commit("diary_error", err);
+      commit("updateDiary_error", err);
     }
   },
 
@@ -150,7 +164,7 @@ const actions = {
   async getDiaries({ commit }) {
     try {
       commit("diaries_request");
-      let res = await axios.get("http://localhost:9354/api/diaries");
+      let res = await axios.get("http://localhost:3000/api/diaries");
       commit("diaries_data", res.data);
       console.log(res.data);
       return res;
@@ -237,6 +251,17 @@ const mutations = {
     state.status = "success";
   },
   updateDiary_error(state, err) {
+    state.error = err.response.data.msg;
+  },
+  updateUser_request(state) {
+    state.error = null;
+    state.status = "loading";
+  },
+  updateUser_success(state) {
+    state.error = null;
+    state.status = "success";
+  },
+  updateUser_error(state, err) {
     state.error = err.response.data.msg;
   },
   deleteDiary_success(state) {
